@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     build-essential \
+    dos2unix \
     python3-pip
 
 # Install AWS CLI
@@ -46,10 +47,9 @@ RUN useradd -m vscode
 USER vscode
 
 # Copy the content of your repository into the container
-COPY . .
-
 USER root
-RUN chown -R vscode:vscode .
+COPY --chown=vscode:vscode . .
+RUN dos2unix ./*
 WORKDIR /home/vscode
 
 # This will enable the terminal's interactive shell
