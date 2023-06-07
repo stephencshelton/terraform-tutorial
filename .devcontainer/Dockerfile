@@ -28,7 +28,7 @@ RUN curl -LO https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz \
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
-    && sudo ./aws/install \
+    && ./aws/install \
     && rm awscliv2.zip
 
 # Install Terraform
