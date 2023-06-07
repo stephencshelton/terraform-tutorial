@@ -17,7 +17,10 @@
         "terminal.integrated.defaultProfile.linux": "bash",
         "go.gopath": "/go",
         "go.goroot": "/usr/local/go"
-      }
+	},
+	"extensions": [
+		"hashicorp.terraform"
+	]
     }
   },
   "workspaceFolder": "/workspace",
