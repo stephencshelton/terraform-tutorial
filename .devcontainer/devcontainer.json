@@ -19,7 +19,12 @@
         "go.goroot": "/usr/local/go"
 	},
 	"extensions": [
-		"hashicorp.terraform"
+		"hashicorp.terraform",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode.go",
+    "ms-python.python",
+    "redhat.vscode-yaml",
+    "amazonwebservices.aws-toolkit-vscode"
 	]
     }
   },
