@@ -54,7 +54,7 @@ RUN echo 'source /etc/profile' >> /home/vscode/.bashrc \
     && echo "alias l='ls -CF'" >> /home/vscode/.bashrc \
     && echo "alias la='ls -A'" >> /home/vscode/.bashrc \
     && echo "alias lla='ls -lA'" >> /home/vscode/.bashrc \
-    && echo "export PATH=/usr/local/go/bin:\$PATH" >> /home/vscode/.bashrc && \
+    && echo "export PATH=/usr/local/go/bin:\$PATH" >> /home/vscode/.bashrc \
     && terraform -install-autocomplete
 
 # Copy the content of your repository into the container
