@@ -1,12 +1,13 @@
 # Use the official image as a parent image
 FROM ubuntu:22.04
 
-# Set the working directory
-WORKDIR /workspace
-
 # Set environment variables for versions
 ENV GO_VERSION 1.20.5
 ENV TERRAFORM_VERSION 1.4.6
+ENV TERM xterm-256color
+
+# Set the working directory
+WORKDIR /workspace
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
@@ -15,10 +16,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     build-essential \
     dos2unix \
-    python3-pip
-
-# Install AWS CLI
-RUN pip3 install --upgrade awscli
+    python3-pip \
+    bash-completion
 
 # Install Go
 RUN curl -LO https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz \
@@ -44,7 +43,18 @@ RUN apt-get autoremove -y \
 
 # This will automatically enable the vscode server's features
 RUN useradd -m vscode
+
+# Add tab completion, colors, and a fancy prompt for the vscode user
 USER vscode
+RUN echo 'source /etc/profile' >> /home/vscode/.bashrc \
+    && echo 'complete -C '/usr/local/bin/aws_completer' aws' >> /home/vscode/.bashrc \
+    && echo "export PS1=\"\[\e[36m\]\u\[\e[m\]@\[\e[32m\]\h:\[\e[33;1m\]\W\[\e[m\]\$ \"" >> /home/vscode/.bashrc \
+    && echo "alias ls='ls --color=auto'" >> /home/vscode/.bashrc \
+    && echo "alias ll='ls -l'" >> /home/vscode/.bashrc \
+    && echo "alias l='ls -CF'" >> /home/vscode/.bashrc \
+    && echo "alias la='ls -A'" >> /home/vscode/.bashrc \
+    && echo "alias lla='ls -lA'" >> /home/vscode/.bashrc \
+    && terraform -install-autocomplete
 
 # Copy the content of your repository into the container
 USER root
