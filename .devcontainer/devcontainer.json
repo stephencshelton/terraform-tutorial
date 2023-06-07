@@ -20,9 +20,6 @@
       }
     }
   },
-  "containerEnv": {
-    "PATH": "/usr/local/go/bin:${containerEnv:PATH}"
-  },
   "workspaceFolder": "/workspace",
   "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"]
 }
